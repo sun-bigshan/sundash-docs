@@ -28,6 +28,7 @@ if (isGithubActions) {
 module.exports = withBundleAnalyzer({
   assetPrefix,
   basePath,
+  reactStrictMode: true,
   swcMinify: true,
   pageExtensions: ['js', 'tsx', 'jsx', 'mdx', 'md'],
   experimental: {
