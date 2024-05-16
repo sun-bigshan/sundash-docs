@@ -12,7 +12,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const defaultConfig = require('tailwindcss/resolveConfig')(require('tailwindcss/defaultConfig'))
 
+const repo = 'sundash-docs/out'
+const assetPrefix = `/${repo}/`
+const basePath = `/${repo}`
+
 module.exports = withBundleAnalyzer({
+  assetPrefix: assetPrefix,
+  basePath: basePath,
   swcMinify: true,
   pageExtensions: ['js', 'tsx', 'jsx', 'mdx', 'md'],
   experimental: {
