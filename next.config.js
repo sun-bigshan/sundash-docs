@@ -12,13 +12,22 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const defaultConfig = require('tailwindcss/resolveConfig')(require('tailwindcss/defaultConfig'))
 
-const repo = 'sundash-docs/out'
-const assetPrefix = `/${repo}/`
-const basePath = `/${repo}`
+const isGithubActions = process.env.GITHUB_ACTIONS || false
+
+let assetPrefix = ''
+let basePath = '/'
+
+if (isGithubActions) {
+  // 去掉 `<owner>/`
+  const repo = process.env.GITHUB_REPOSITORY.replace(/.*?\//, '')
+
+  assetPrefix = `/${repo}/`
+  basePath = `/${repo}`
+}
 
 module.exports = withBundleAnalyzer({
-  assetPrefix: assetPrefix,
-  basePath: basePath,
+  assetPrefix,
+  basePath,
   swcMinify: true,
   pageExtensions: ['js', 'tsx', 'jsx', 'mdx', 'md'],
   experimental: {
